@@ -1,40 +1,26 @@
-char	ft_type_character(char *str)
-{
-	char *type;
-	int x;
-
-	x = -1;
-	if (str[x] > 'A' && str[x] < 'Z')
-		*type = "uppercase";
-	else if (str[x] > 'a' && str[x] < 'z')
-		*type = "lowercase";
-	else if (str[x] > '0' && str[x] < '9')
-		*type = "number";
-	else
-		*type = "symbol";
-	return (type);
-}
+#include <unistd.h>
 
 char	*ft_strcapitalize(char *str)
 {
 	int x;
-	*char previous;
+	int p;
 
 	x = 0;
-	previous = str[x - 1];
-	while (str[x] != '\0')
+	p = str[x - 1];
+	if ((p < 48 || p > 57) && (p < 65 || p > 90) && (p < 97 || p > 122))
 	{
-		if (previous == "symbol" && str == "lowercase")
-		{
-			str[x] = str[x] - 32;
-		}
-		++x;
+		if (str[x] >= 'a' && str[x] <= 'z')
+		str[x] -= 32;
 	}
+	write(1, str, 1);
+	if (str[x] != '\0')
+		ft_strcapitalize(str + 1);
 	return (str);
 }
 
-int	main(void)
+int     main(void)
 {
-	*ft_strcapitalize("salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un");
+	char c[100] = "salut, comment tu vas ? 42imots quarante-deux; cinquante+et+un";
+	*ft_strcapitalize(c);
 	return (0);
 }
