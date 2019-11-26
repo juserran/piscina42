@@ -19,6 +19,6 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 
 int	main(void)
 {
-	*ft_strncat("Hola Mundo", "Bye World", 8);
+	*ft_strncat("Hola Mundo", "Bye World", 3);
 	return (0);
 }

@@ -1,5 +1,3 @@
-#include <unistd.h>
-
 char	*ft_strcat(char *dest, char *src)
 {
 	int x;
@@ -8,18 +6,15 @@ char	*ft_strcat(char *dest, char *src)
 	x = 0;
 	y = 0;
 	while (dest[x] != '\0')
-	{
-		write(1, dest[x], 1);
 		++x;
-}
-	while (src[x] != '\0')
+	while (src[y] != '\0')
 	{
-		dest[x + y] = src[y];
-		write(1, dest, 1);
+		dest[x] = src[y];
+		++x;
 		++y;
 	}
-	dest[x + y] = '\0';
-	return (dest[x + y]);
+	dest[x] = '\0';
+	return (dest);
 }	
 
 int	main(void)
