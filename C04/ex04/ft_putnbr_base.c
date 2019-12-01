@@ -18,7 +18,7 @@ int     ft_strlen(char *str)
 	return(x);
 }
 
-int	ft_check_base(char *base)
+int	ft_check_base(char *base, int len)
 {
 	int x;
 	int y;
@@ -28,36 +28,47 @@ int	ft_check_base(char *base)
 	while (base[x])
 	{
 		if (base[0] == '\0' || base[1] == '\0')
-			return (0);
+			return (1);
 		else if (base[x] == '-' || base[x] == '+')
-			return (0);
-		else if (base[x] < 32 || base[x] > 126)
-			return (0);
-		else if (base[x] == base[y])
-			return (0);
+			return (2);
+		while (y < len)
+		{
+			if (base[x] == base[y])
+				return (3);
+			++y;
+		}
 		++x;
 	}
-	return (1);
+	return (0);
+}
+
+void	ft_print_nbr_base(int nbr, char *base, int len)
+{
+	int mod;
+
+	mod = nbr % len;
+	if (nbr >= len)
+		ft_print_nbr_base(nbr / len, base, len);
+	ft_putchar(base[mod]);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int len;
-	int sign;
+	int go;
 
-	sign = 1;
-	ft_check_base(base);
-	ft_strlen(base);
 	len = ft_strlen(base);
-	if (nbr)
+	go = ft_check_base(base, len);
+	if (go != 0)
+		ft_putchar(go + 48);
+	if (go == 0)
 	{
 		if (nbr < 0)
 		{
-			sign *= -1;
 			ft_putchar('-');
+			nbr *= -1;
 		}
-		ft_putnbr_base(nbr / len, base);
-		ft_putchar(nbr % len + '0');
+		ft_print_nbr_base(nbr, base, len);
 	}
 }
 
@@ -65,7 +76,7 @@ int	main(void)
 {
 	int number;
 
-	number = 0;
-	ft_putnbr_base(number, "0123456789");
+	number = 8;
+	ft_putnbr_base(number, "poniguay");
 	return (0);
 }

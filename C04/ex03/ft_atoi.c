@@ -1,5 +1,32 @@
 #include <unistd.h>
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void    ft_putnbr(int nb)
+{
+	if (nb >= 0 && nb < 10)
+		ft_putchar(nb + '0');
+	else if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar(nb % 10 + '0');
+	}
+	else
+	{
+		ft_putchar('-');
+		if (nb == -2147483648)
+		{
+			ft_putchar('2');
+			ft_putnbr(147483648);
+			return;
+		}
+		ft_putnbr(nb * -1);
+	}
+}
+
 int	ft_atoi(char *str)
 {
 	int x;
@@ -9,29 +36,27 @@ int	ft_atoi(char *str)
 	x = 0;
 	sign = 1;
 	num = 0;
-	if ((str[x] > 10 && str[x] < 14) || (str[x] == 32))
+	while ((str[x] > 10 && str[x] < 14) || (str[x] == 32))
 		++x;
-	else if (str[x] == '+' || str[x] == '-')
+	while (str[x] == '+' || str[x] == '-')
 	{
 		if (str[x] == '-')
-			sign = -1;
+			sign *= -1;
 		++x;
 	}
-	else if (str[x] > 47 && str[x] < 58)
+	while (str[x] > 47 && str[x] < 58)
 	{
-		while (str[x] != '\0')
-		{
-			num = (num * 10) + (str[x] - '0');
-			write(1, &num, x);
-			++x;
-		}
-		num *= sign;
+		num = (num * 10) + str[x] - 48;
+		++x;
 	}
-	return (num);
+	return (num * sign);
 }
 
 int	main(void)
 {
-	ft_atoi(" +-1490");
+	int atoi;
+
+	atoi = ft_atoi("   ---+--1234ab567");
+	ft_putnbr(atoi);
 	return (0);
 }
