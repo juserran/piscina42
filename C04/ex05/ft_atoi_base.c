@@ -61,7 +61,7 @@ int	ft_clean_atoi(char *str)
 
 	x = 0;
 	sign = 1;
-
+	num = 0;
 	while ((str[x] > 10 && str[x] < 14) || (str[x] == 32))
 		++x;
 	while (str[x] == '+' || str[x] == '-')
@@ -83,19 +83,26 @@ int	ft_atoi_base(char *str, char *base)
 {
 	int len;
 	int go;
-	int atoi;
+	int num;
 	int res;
 
 	len = ft_strlen(base);
 	go = ft_check_base(base, len);
-	atoi = ft_clean_atoi(str);
-	if (go != 0)
-	res = ft_print_nbr_base(atoi, base, len);
+	num = ft_clean_atoi(str);
+	if (go == 0)
+	{
+		if (num < 0)
+		{
+			ft_putchar('-');
+			num *= -1;
+		}
+		res = ft_print_nbr_base(num, base, len);
+	}
 	return (res);
 }
 
 int	main(void)
 {
-	ft_atoi_base("  +--10", "01");
+	ft_atoi_base("  +-2299ai", "0123456789ABCDEF");
 	return (0);
 }
