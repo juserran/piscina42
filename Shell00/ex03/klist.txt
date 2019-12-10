@@ -1,0 +1,6 @@
+Credentials cache: API:4832
+        Principal: juserran@42MADRID.COM
+
+  Issued                Expires               Principal
+Oct  3 18:53:57 2019  Oct  4 04:53:57 2019  krbtgt/42MADRID.COM@42MADRID.COM
+Oct  3 18:53:58 2019  Oct  4 04:53:57 2019  HTTP/student-storage.42madrid.com@42MADRID.COM
